@@ -14,4 +14,4 @@ def readFile():
         lap_id = lap_id + 1
 
         # returns the values of laptop dictionary
-        return lap_dict
+    return lap_dict
