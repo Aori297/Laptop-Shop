@@ -2,9 +2,23 @@
 from files.read import *
 laptop_dict = readFile()
 
+
+
 def userinput():
-    name = input("Enter name: ")
-    address = input("Enter Address: ")
+    
+    while True:
+         name = input("Enter name: ")
+         if name.isalpha():
+           break
+         else:
+           print("Invalid input. Please enter only alphabetical characters.")
+
+    while True:
+            address = input("Enter address: ")
+            if address.isalpha():
+              break
+            else:
+                 print("Invalid input. Please enter only alphabetical characters.")
     # Validating Phone Number to make sure it is a integer
     while True:
         phone = input("Enter phone number: ")
@@ -109,16 +123,15 @@ def buy_serialNum():
             snNum = int(input("Enter the Serial number of the laptop you want to purchase"))
             if snNum <= 0 or snNum > len(laptop_dict):
                  print("Invalid Serial number. Serial number must be a integer between 0 and", len(laptop_dict))
-                 snNum = buy_serialNum()
+                 snNum = serialNum()
     except:
             print("Invalid input")
     return snNum
 
-
 def buy_quantity(snNum):
     try:
             qNum = int(input("Enter the quantity"))
-            if qNum <= 0:
+            if qNum <= 0 or qNum > int(laptop_dict[snNum][3]):
                  print("Invalid Quantity. Quantity must be between 0 to", int(laptop_dict[snNum][3]))
                  qNum = quantity(snNum)
     except:
@@ -178,5 +191,24 @@ def buy(lap_dict):
             print("Invalid input")
     return snNum 
 
+
+# OPTION 2 
+def manufacturerInput():
+    
+    while True:
+        manufacturername = input("Enter the Name of the manufacturer: ")
+        if manufacturername.isalpha():
+            break
+        else:
+            print("Invalid input. Please enter only alphabetical characters.")
+
+    while True:
+        manufactureraddress = input("Enter the address of the manufacturer: ")
+        if manufactureraddress.isalpha():
+            break
+        else:
+            print("Invalid input. Please enter only alphabetical characters.")
+
+    return manufacturername, manufactureraddress
 
 

@@ -30,10 +30,6 @@ def sellingBill(name, address, phone, choosenLaptop):
 
 
 def purchaseBill():
-   ("---------------------------------------------------------------------------------------------------------")
-    print("Name:", name)
-    print("Address:", address)
-    print("Phone:", phone)
     print("------------------------------------------------------------------------------------------")
     print("|S.N.     |Device Name \t\t |Company Name \t\t |Quantity\t |Price \t |")
     print("------------------------------------------------------------------------------------------")
