@@ -22,7 +22,7 @@ def sellingBill(name, address, phone, choosenLaptop):
     
     count = 1
     for i in choosenLaptop:
-        print ("|", count,"\t  |",i[0], "\t |", i[1], "\t |", i[2], "\t |", i[3],  "\t\t |")
+        print ("|", count,"\t  |",i[0], "\t |", i[1], "\t         |", i[2], "\t         |", i[3],  "\t |")
         print("------------------------------------------------------------------------------------------")
         count+=1
 

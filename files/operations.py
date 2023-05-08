@@ -78,11 +78,11 @@ def updateQuantity(snNum, qNum, laptop_dict):
 # ! baki xa
 def stockLaptop(lap_dict):
     print("-----------------------------------------------------------------------------------------------------------------")
-    print("|S.N.   |Device Name \t\t |Manufacturer\t |Price \t |Quantity\t |CPU\t\t |GPU \t\t|")
+    print("|S.N.   |Device Name \t\t |Manufacturer\t |Price \t |Quantity\t |CPU\t\t|GPU \t\t|")
     print("-----------------------------------------------------------------------------------------------------------------")
     count = 1 
     for count in range(1, len(lap_dict)+1):
-         print("|", count,"\t|", lap_dict[count][0], "\t", lap_dict[count][1], "\t", lap_dict[count][2], "\t", lap_dict[count][3], "\t", lap_dict[count][4], "\t", lap_dict[count][5],"\t|")
+         print("|", count,"\t|", lap_dict[count][0], "\t", lap_dict[count][1], "\t|", lap_dict[count][2], "\t |", lap_dict[count][3], "\t\t |", lap_dict[count][4], "\t|", lap_dict[count][5],"\t|")
          count = count+1
          print("-----------------------------------------------------------------------------------------------------------------")
 
