@@ -1,5 +1,4 @@
-# reading the laptop.txt file here
-
+# to read the laptop.txt file 
 def readFile():
     file = open("laptop.txt","r")
     lap_dict = {}
