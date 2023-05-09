@@ -47,9 +47,10 @@ def quantity(snNum):
             if qNum <= 0 or qNum > int(laptop_dict[snNum][3]):
                  print("Invalid Quantity. Quantity must be between 0 to", int(laptop_dict[snNum][3]))
                  qNum = quantity(snNum)
+            return qNum 
     except:
             print("Invalid input")
-    return qNum 
+    return -1 
 
 def updateList(snNum, laptop_dict, qNum, choosenLaptop):
          prodName = laptop_dict[snNum][0]
@@ -138,9 +139,10 @@ def buy_quantity(snNum):
             if qNum <= 0:
                  print("Invalid Quantity. Quantity must be between 0 to", int(laptop_dict[snNum][3]))
                  qNum = buy_quantity(snNum)
+            return qNum 
     except:
             print("Invalid input")
-    return qNum 
+    return -1 
 
 def buy_updateList(snNum, laptop_dict, qNum, choosenLaptop):
          prodName = laptop_dict[snNum][0]

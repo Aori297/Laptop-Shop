@@ -61,14 +61,16 @@ def purchaseBill(distributername, choosenLaptop):
     print("\n")
     print("\n")
 
+    createPurchaseBill(distributername, choosenLaptop, totalsum, vat, grandTotal)
+
 
 def createSellingBill(name, address, phone, choosenLaptop, shipping, grandTotal):
     date = datetime.datetime.now()
-
     date = str(date).replace(":","")
 
-    filename = "bills/" + name + date + ".txt"
+    filename = "bills/selling/" + name + date + ".txt"
     file = open(filename, "w")
+
     file.write("\n")
     file.write("The Notebook Warehouse".center(100) + "\n")
     file.write("Basundhara, Kathmandu".center(100) + "\n")
@@ -86,7 +88,7 @@ def createSellingBill(name, address, phone, choosenLaptop, shipping, grandTotal)
 
     count = 1
     for i in choosenLaptop:
-        file.write("|"+ str(count) +"\t  |"+i[0]+ "\t |"+ str(i[1])+ "\t         |"+ str(i[2])+ "\t         |"+ str(i[3])+ "\t |"+str(i[4])+"\n")
+        file.write("|"+ str(count) +"\t     |"+i[0]+ "\t |"+ str(i[1])+ "\t         |"+ str(i[2])+ "\t         |"+ str(i[3])+ "\t |"+str(i[4])+"\n")
         file.write("---------------------------------------------------------------------------------------------------------\n")
         count += 1
 
@@ -97,3 +99,32 @@ def createSellingBill(name, address, phone, choosenLaptop, shipping, grandTotal)
 
     # Close the file
     file.close()
+
+
+
+def createPurchaseBill(distributername, choosenLaptop, totalsum, vat, grandTotal):
+    date = datetime.datetime.now()
+    date = str(date).replace(":","")
+
+    filename = "bills/purchase/" + distributername + date + ".txt"
+    file = open(filename, "w")
+
+    file.write("\n")
+    file.write("Generating Bill...\n")
+    file.write("--------------------------------------------------------------------------------------------------------\n")
+    file.write("Distributer Name: " + distributername + "\n")
+    date = datetime.datetime.now()
+    file.write("Date: " + str(date.strftime("%x")) + "\n")
+    file.write("--------------------------------------------------------------------------------------------------------\n")
+    file.write("|S.N.     |Device Name \t\t |Manufacturer\t\t |Quantity \t |Price\t\t | Total Price  \n")
+    file.write("--------------------------------------------------------------------------------------------------------\n")
+    count = 1
+    for i in choosenLaptop:
+        file.write(" " + str(count) + "\t       " + i[0] + "\t " + i[1] + "\t       " + str(i[2]) + "\t         " + str(i[3]) + "\t     " + str(i[4]) + "\n")
+        file.write("--------------------------------------------------------------------------------------------------------\n")
+        count+=1
+    file.write("Total: " + str(totalsum) + "\n")
+    file.write("Vat Total: " + str(vat) + "\n")
+    file.write("Grand Total: " + str(grandTotal) + "\n")
+    file.write("\n")
+    file.write("\n")

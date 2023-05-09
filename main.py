@@ -29,6 +29,8 @@ def main():
                 print("\n")
                 snNum = serialNum()
                 qNum = quantity(snNum)
+                while qNum == -1:
+                    qNum = quantity(snNum)
                 qNum = int(qNum)
                 updateQuantity(snNum, qNum, laptop_dict)
                 lap_dict[snNum][3] = int(lap_dict[snNum][3]) - int(qNum)
@@ -56,6 +58,8 @@ def main():
                 print("\n")
                 snNum = buy_serialNum()
                 qNum = buy_quantity(snNum)
+                while qNum == -1:
+                    qNum = buy_quantity(snNum)
                 buy_updateQuantity(snNum, qNum, laptop_dict)
                 lap_dict[snNum][3] = int(lap_dict[snNum][3]) + int(qNum)
                 choosenLaptop = buy_updateList(snNum, laptop_dict, qNum, choosenLaptop)
