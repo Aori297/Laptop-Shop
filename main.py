@@ -24,54 +24,53 @@ def main():
             choosenLaptop = []
             name, address, phone = userinput()
             buyMore = True
+            stockLaptop(lap_dict)
             while buyMore == True:
-                stockLaptop(lap_dict)
                 print("\n")
                 snNum = serialNum()
                 qNum = quantity(snNum)
                 qNum = int(qNum)
                 updateQuantity(snNum, qNum, laptop_dict)
+                lap_dict[snNum][3] = int(lap_dict[snNum][3]) - int(qNum)
                 choosenLaptop = updateList(snNum, laptop_dict, qNum, choosenLaptop)
 
-                MoreLaptop = input("Do you want to buy another laptop?")
-                if MoreLaptop == "yes" or MoreLaptop == "Yes":
+                MoreLaptop = input("Do you want to buy another laptop? (Yes/No): ")
+                if MoreLaptop == "yes" or MoreLaptop == "Yes" or MoreLaptop == "Y" or MoreLaptop == "y":
                     buyMore = True
                 else:    
                     sellingBill(name, address, phone, choosenLaptop)
                     buyMore = False
 
+
+
+
+
+
+
         elif option == '2':
             choosenLaptop = []
-            manufacturername, manufactureraddress = manufacturerInput()
-            print (manufacturername, manufactureraddress)
-            
-            # ! operations ma validate
-
+            distributername = manufacturerInput()    
+            buy_stockLaptop(lap_dict)
             buyMore = True
             while buyMore == True:
-                buy_stockLaptop(lap_dict)
                 print("\n")
-
                 snNum = buy_serialNum()
-                
-                print("Serial Num", snNum)
-
                 qNum = buy_quantity(snNum)
-
-                print("Quantity", qNum)
-
                 buy_updateQuantity(snNum, qNum, laptop_dict)
-
+                lap_dict[snNum][3] = int(lap_dict[snNum][3]) + int(qNum)
                 choosenLaptop = buy_updateList(snNum, laptop_dict, qNum, choosenLaptop)
-                print("Laptop Sold", choosenLaptop)
 
-                MoreLaptop = input("Do you want to buy another laptop?")
-                if MoreLaptop == "yes" or MoreLaptop == "Yes":
-                    
+                MoreLaptop = input("Do you want to restock another laptop?(Yes/No): ")
+                if MoreLaptop == "yes" or MoreLaptop == "Yes" or MoreLaptop == "Y" or MoreLaptop == "y":
                     buyMore = True
                 else:    
-                    #sellingBill(name, address, phone, choosenLaptop)
+                    purchaseBill(distributername, choosenLaptop)
                     buyMore = False
+
+
+
+
+
 
         elif option == '3':
             print("\n")
