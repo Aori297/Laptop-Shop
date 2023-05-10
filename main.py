@@ -63,8 +63,9 @@ def main():
                         lap_dict[snNum][3] = int(lap_dict[snNum][3]) + int(qNum)
                         choosenLaptop = buy_updateList(snNum, laptop_dict, qNum, choosenLaptop)
 
-                        MoreLaptop = input("Do you want to restock another laptop?(Yes/No): ")
-                        if MoreLaptop == "yes" or MoreLaptop == "Yes" or MoreLaptop == "Y" or MoreLaptop == "y":
+                        MoreLaptop = input("Do you want to buy another laptop? (Yes/No): ")
+                        while MoreLaptop.lower() not in ['yes', 'no']:
+                            MoreLaptop = input("Invalid input. Please enter 'Yes' or 'No': ")
                             buyMore = True
                         else:    
                             purchaseBill(distributername, choosenLaptop)
