@@ -1,6 +1,7 @@
 import datetime
 date = datetime.datetime.now()
 
+# !  Displays a bill after the laptop is sold in terminal
 def sellingBill(name, address, phone, choosenLaptop):
     total = 0
     shipping = 150
@@ -34,6 +35,7 @@ def sellingBill(name, address, phone, choosenLaptop):
     print("\n")
     createSellingBill(name, address, phone, choosenLaptop, shipping, grandTotal)
 
+# !  Displays a bill after the laptop is restocked in terminal
 def purchaseBill(distributername, choosenLaptop):
     total = 0
     for i in choosenLaptop:
@@ -63,7 +65,7 @@ def purchaseBill(distributername, choosenLaptop):
 
     createPurchaseBill(distributername, choosenLaptop, totalsum, vat, grandTotal)
 
-
+# ! Creates a .txt file in bills/selling/ folder
 def createSellingBill(name, address, phone, choosenLaptop, shipping, grandTotal):
     date = datetime.datetime.now()
     date = str(date).replace(":","")
@@ -101,7 +103,7 @@ def createSellingBill(name, address, phone, choosenLaptop, shipping, grandTotal)
     file.close()
 
 
-
+# ! Creates a .txt file in bills/purchase/ folder
 def createPurchaseBill(distributername, choosenLaptop, totalsum, vat, grandTotal):
     date = datetime.datetime.now()
     date = str(date).replace(":","")

@@ -5,9 +5,8 @@ from files.write import *
 
 lap_dict = readFile()
 
-
-def main():  
-    loop = True   
+def main():
+    loop = True
     while loop == True:
         print("The Notebook Warehouse".center(100))
         print("Basundhara, Kathmandu".center(100))
@@ -17,71 +16,71 @@ def main():
         print("3. Exit")
         print("_" * 100)
         print()
-        
-        option = input("What would you like to do? ")
-        
-        if option == "1":
-            choosenLaptop = []
-            name, address, phone = userinput()
-            buyMore = True
-            stockLaptop(lap_dict)
-            while buyMore == True:
-                print("\n")
-                snNum = serialNum()
-                qNum = quantity(snNum)
-                while qNum == -1:
-                    qNum = quantity(snNum)
-                qNum = int(qNum)
-                updateQuantity(snNum, qNum, laptop_dict)
-                lap_dict[snNum][3] = int(lap_dict[snNum][3]) - int(qNum)
-                choosenLaptop = updateList(snNum, laptop_dict, qNum, choosenLaptop)
 
-                MoreLaptop = input("Do you want to buy another laptop? (Yes/No): ")
-                if MoreLaptop == "yes" or MoreLaptop == "Yes" or MoreLaptop == "Y" or MoreLaptop == "y":
+        try:
+            option = int(input("What would you like to do? "))
+            if option >= 1 and option <= 3:
+                if option == 1:
+                    # Sell laptops
+                    choosenLaptop = []
+                    name, address, phone = userinput()
                     buyMore = True
-                else:    
-                    sellingBill(name, address, phone, choosenLaptop)
-                    buyMore = False
+                    stockLaptop(lap_dict)
+                    while buyMore == True:
+                        print("\n")
+                        snNum = serialNum()
+                        qNum = quantity(snNum)
+                        while qNum == -1:
+                            qNum = quantity(snNum)
+                        qNum = int(qNum)
+                        updateQuantity(snNum, qNum, laptop_dict)
+                        lap_dict[snNum][3] = int(lap_dict[snNum][3]) - int(qNum)
+                        choosenLaptop = updateList(snNum, laptop_dict, qNum, choosenLaptop)
+
+                        MoreLaptop = input("Do you want to buy another laptop? (Yes/No): ")
+                        while MoreLaptop.lower() not in ['yes', 'no']:
+                            MoreLaptop = input("Invalid input. Please enter 'Yes' or 'No': ")
+                        if MoreLaptop.lower() == "yes":
+                            buyMore = True
+                        else:
+                            sellingBill(name, address, phone, choosenLaptop)
+                            buyMore = False
 
 
-
-
-
-
-
-        elif option == '2':
-            choosenLaptop = []
-            distributername = manufacturerInput()    
-            buy_stockLaptop(lap_dict)
-            buyMore = True
-            while buyMore == True:
-                print("\n")
-                snNum = buy_serialNum()
-                qNum = buy_quantity(snNum)
-                while qNum == -1:
-                    qNum = buy_quantity(snNum)
-                buy_updateQuantity(snNum, qNum, laptop_dict)
-                lap_dict[snNum][3] = int(lap_dict[snNum][3]) + int(qNum)
-                choosenLaptop = buy_updateList(snNum, laptop_dict, qNum, choosenLaptop)
-
-                MoreLaptop = input("Do you want to restock another laptop?(Yes/No): ")
-                if MoreLaptop == "yes" or MoreLaptop == "Yes" or MoreLaptop == "Y" or MoreLaptop == "y":
+                elif option == 2:
+                    # Purchase laptops
+                    choosenLaptop = []
+                    distributername = manufacturerInput()    
+                    stockLaptop(lap_dict)
                     buyMore = True
-                else:    
-                    purchaseBill(distributername, choosenLaptop)
-                    buyMore = False
+                    while buyMore == True:
+                        print("\n")
+                        snNum = buy_serialNum()
+                        qNum = buy_quantity(snNum)
+                        while qNum == -1:
+                            qNum = buy_quantity(snNum)
+                        buy_updateQuantity(snNum, qNum, laptop_dict)
+                        lap_dict[snNum][3] = int(lap_dict[snNum][3]) + int(qNum)
+                        choosenLaptop = buy_updateList(snNum, laptop_dict, qNum, choosenLaptop)
 
+                        MoreLaptop = input("Do you want to restock another laptop?(Yes/No): ")
+                        if MoreLaptop == "yes" or MoreLaptop == "Yes" or MoreLaptop == "Y" or MoreLaptop == "y":
+                            buyMore = True
+                        else:    
+                            purchaseBill(distributername, choosenLaptop)
+                            buyMore = False
 
-
-
-
-
-        elif option == '3':
-            print("\n")
-            print("Exitting...")  
-            loop = False
-        else:
-            print("Invalid input ... ")
+                elif option == 3:
+                    # Exit
+                    print("\n")
+                    print("Exiting...")
+                    loop = False
+            else:
+                print("Invalid input. Please enter a valid option (1-3).")
+                print()
+        except ValueError:
+            print("Invalid input. Please enter a valid option (1-3).")
             print()
+
 
 main()

@@ -3,6 +3,20 @@ from files.read import *
 laptop_dict = readFile()
 
 
+# ! displays the laptop details in a table
+def stockLaptop(lap_dict):
+    print("-----------------------------------------------------------------------------------------------------------------")
+    print("|S.N.   |Device Name \t\t |Manufacturer\t |Price \t |Quantity\t |CPU\t\t|GPU \t\t|")
+    print("-----------------------------------------------------------------------------------------------------------------")
+    count = 1 
+    for count in range(1, len(lap_dict)+1):
+         print("|", count,"\t|", lap_dict[count][0], "\t |", lap_dict[count][1], "\t |", lap_dict[count][2], "\t |", lap_dict[count][3], "\t\t |", lap_dict[count][4], "\t|", lap_dict[count][5],"\t|")
+         count = count+1
+         print("-----------------------------------------------------------------------------------------------------------------")
+
+
+# ! Selling Laptop Code
+# ! Asks and validates user for their information
 def userinput():
     # Validating name is a alphabet
     while True:
@@ -30,17 +44,21 @@ def userinput():
     return name, address, phone
 
 
+# ! Asks and validates the serial number of the laptop while user buys a laptop
 def serialNum():
-    try:
+    while True:
+        try:
             snNum = int(input("Enter the Serial number of the laptop you want to purchase: "))
             if snNum <= 0 or snNum > len(laptop_dict):
-                 print("Invalid Serial number. Serial number must be a integer between 0 and", len(laptop_dict))
-                 snNum = serialNum()
-    except:
-            print("Invalid input")
-    return snNum
+                print("Invalid Serial number. Serial number must be a integer between 0 and", len(laptop_dict))
+            else:
+                return snNum
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+            
 
 
+# ! Asks and validates the quantity of the laptop from laptop.txt file while buying a laptop
 def quantity(snNum):
     try:
             qNum = int(input("Enter the quantity: "))
@@ -52,6 +70,8 @@ def quantity(snNum):
             print("Invalid input")
     return -1 
 
+
+# ! Updates a list of selected laptops with the details and prices of a newly selected laptop
 def updateList(snNum, laptop_dict, qNum, choosenLaptop):
          prodName = laptop_dict[snNum][0]
          companyName = laptop_dict[snNum][1]
@@ -64,8 +84,9 @@ def updateList(snNum, laptop_dict, qNum, choosenLaptop):
          choosenLaptop.append([prodName, companyName, prodQuantity, selectedPrice, totalPrice])
 
          return choosenLaptop
-     
 
+
+# ! Subtracts the laptops quantity when the laptop is sold
 def updateQuantity(snNum, qNum, laptop_dict):
      laptop_dict[snNum][3] = int(laptop_dict[snNum][3]) - int(qNum)
      
@@ -77,42 +98,11 @@ def updateQuantity(snNum, qNum, laptop_dict):
 
 
 
-def stockLaptop(lap_dict):
-    print("-----------------------------------------------------------------------------------------------------------------")
-    print("|S.N.   |Device Name \t\t |Manufacturer\t |Price \t |Quantity\t |CPU\t\t|GPU \t\t|")
-    print("-----------------------------------------------------------------------------------------------------------------")
-    count = 1 
-    for count in range(1, len(lap_dict)+1):
-         print("|", count,"\t|", lap_dict[count][0], "\t |", lap_dict[count][1], "\t |", lap_dict[count][2], "\t |", lap_dict[count][3], "\t\t |", lap_dict[count][4], "\t|", lap_dict[count][5],"\t|")
-         count = count+1
-         print("-----------------------------------------------------------------------------------------------------------------")
-
-     
-
-def sell(lap_dict):
-    name, address, phone = userinput()
-    print("Welcome")
-
-    keep_buying = True
-    while keep_buying == True:
-        # stockLaptop(lap_dict)
-        print("Sell")
-        try:
-            snNum = int("Enter the Serial number of the laptop you want to purchase: ")
-        
-        except:
-            print("Invalid input")
-    return snNum 
 
 
 
-
-
-
-
-
-
-# ! Code for Purchasing Laptop
+# ! Buying Laptop Code
+# ! Asks and Validates the Distributers name
 def manufacturerInput():
     while True:
         distributername = input("Enter the Name of the distributer: ")
@@ -123,16 +113,21 @@ def manufacturerInput():
     return distributername
 
 
+# ! Asks and Validates the serial name of the laptop in laptop.txt
 def buy_serialNum():
-    try:
+    while True:
+        try:
             snNum = int(input("Enter the Serial number of the laptop you want to restock: "))
-            if snNum <= 0 or snNum > len(laptop_dict):
-                 print("Invalid Serial number. Serial number must be a integer between 0 and", len(laptop_dict))
-                 snNum = serialNum()
-    except:
-            print("Invalid input")
+            if snNum < 1 or snNum > len(laptop_dict):
+                print("Invalid Serial number. Serial number must be an integer between 1 and", len(laptop_dict))
+            else:
+                break
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
     return snNum
 
+
+# ! Asks and validates the quantity from laptop.txt
 def buy_quantity(snNum):
     try:
             qNum = int(input("Enter the quantity you want to restock: "))
@@ -144,6 +139,8 @@ def buy_quantity(snNum):
             print("Invalid input")
     return -1 
 
+
+# ! Updates a list of selected laptops with the details and prices of a newly selected laptop
 def buy_updateList(snNum, laptop_dict, qNum, choosenLaptop):
          prodName = laptop_dict[snNum][0]
          companyName = laptop_dict[snNum][1]
@@ -158,6 +155,7 @@ def buy_updateList(snNum, laptop_dict, qNum, choosenLaptop):
          return choosenLaptop
      
 
+# ! Adds the laptops quantity when the laptop is restocked
 def buy_updateQuantity(snNum, qNum, laptop_dict):
      laptop_dict[snNum][3] = int(laptop_dict[snNum][3]) + int(qNum)
      
@@ -166,14 +164,3 @@ def buy_updateQuantity(snNum, qNum, laptop_dict):
          file.write(str(values[0])+","+str(values[1])+","+str(values[2])+","+str(values[3])+","+str(values[4])+","+str(values[5]))
          file.write("\n")
      file.close()
-
-
-def buy_stockLaptop(lap_dict):
-    print("-----------------------------------------------------------------------------------------------------------------")
-    print("|S.N.   |Device Name \t\t |Manufacturer\t |Price \t |Quantity\t |CPU\t\t|GPU \t\t|")
-    print("-----------------------------------------------------------------------------------------------------------------")
-    count = 1 
-    for count in range(1, len(lap_dict)+1):
-         print("|", count,"\t|", lap_dict[count][0], "\t |", lap_dict[count][1], "\t |", lap_dict[count][2], "\t |", lap_dict[count][3], "\t\t |", lap_dict[count][4], "\t|", lap_dict[count][5],"\t|")
-         count = count+1
-         print("-----------------------------------------------------------------------------------------------------------------")
