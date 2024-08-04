@@ -1,5 +1,5 @@
 # Laptop Shop Inventory Management
-This project is a Python-based application developed as a college coursework to manage the inventory of a laptop shop.
+This project is a Python-based application to manage the inventory of a laptop shop.
 
 ### Project Objectives
 - **Inventory Management**: Manage laptop inventory for a shop.
